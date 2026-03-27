@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee List</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Edit Employee</h2>
+
+    <div class="card">
+        <form action="/update" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" name="id" th:value="${emp.id}">
+
+            <label>Name:</label>
+            <input type="text" name="name" th:value="${emp.name}">
+
+            <label>Description:</label>
+            <textarea name="description" th:text="${emp.description}"></textarea>
+
+            <label>Email:</label>
+            <input type="email" name="email" th:value="${emp.email}">
+
+            <!-- ✅ DROPDOWN FIX -->
+            <label>Role:</label>
+            <select name="role">
+                <option th:selected="${emp.role == 'Developer'}">Developer</option>
+                <option th:selected="${emp.role == 'Tester'}">Tester</option>
+                <option th:selected="${emp.role == 'Manager'}">Manager</option>
+            </select>
+
+            <!-- ✅ GENDER FIX -->
+            <label>Gender:</label>
+            <div class="radio-group">
+                <input type="radio" name="gender" value="Male"
+                       th:checked="${emp.gender == 'Male'}"> Male
+
+                <input type="radio" name="gender" value="Female"
+                       th:checked="${emp.gender == 'Female'}"> Female
+            </div>
+
+            <label>Upload New File:</label>
+            <input type="file" name="file">
+
+            <button type="submit"
+                    onclick="return confirm('Do you want to edit this employee?')"
+            >Update</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
